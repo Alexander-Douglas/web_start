@@ -44,6 +44,6 @@ def check_weather():
     data = request.get_json()
     user_input = data.get("password", "")
     a = weather(user_input)
-    return jsonify({"result": "Il fait:" a })
+    return jsonify({"result": "Il fait:"+a})
 if __name__ == "__main__":
     app.run(debug=True)
