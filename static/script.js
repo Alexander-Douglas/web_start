@@ -7,7 +7,10 @@ document.getElementById("submitBtn").addEventListener("click", () => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ password }),
   })
-    .then((response) => {response.json();console.log("Réponse donné")})
+    .then((response) => {
+      response.json();
+      console.log(reponse);
+    })
     .then((data) => {
       console.log(data.result);
       document.getElementById("response").textContent = data.result;
