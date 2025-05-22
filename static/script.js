@@ -1,5 +1,5 @@
 document.getElementById("submitBtn").addEventListener("click", () => {
-  const password = document.getElementById("passwordInput").value;
+  const password = document.getElementById("ville").value;
 
   // Envoi la requête POST au backend Python
   fetch("/check-weather", {
