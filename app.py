@@ -1,4 +1,13 @@
 from flask import Flask, request, jsonify, render_template
+import pip
+
+def install(package):
+    if hasattr(pip, 'main'):
+        pip.main(['install', package])
+    else:
+        pip._internal.main(['install', package])
+install("requests")
+
 
 app = Flask(__name__)
 
