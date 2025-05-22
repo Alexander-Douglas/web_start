@@ -35,13 +35,6 @@ def weather(city_name):
 
 
 
-
-
-
-
-# Mot de passe en dur
-PASSWORD = "JaiCompris"
-
 @app.route("/")
 def index():
     return render_template("index.html")
