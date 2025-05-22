@@ -12,7 +12,7 @@ document.getElementById("submitBtn").addEventListener("click", () => {
       console.log(reponse);
     })
     .then((data) => {
-      console.log(data.result);
+      console.log(data);
       document.getElementById("response").textContent = data.result;
     })
     .catch(() => {
