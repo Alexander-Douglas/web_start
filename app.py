@@ -24,7 +24,6 @@ lon,lat,appid =str() ,str() , "dbd5bc945bb792cf9efd2af6370466fd"
 # url = "https://api.openweathermap.org/data/2.5/weather?"
 
 def weather(city_name):
-    print("Getting data of "+city_name)
     global payload
     payload = {"q": city_name,"limit": 1,"appid": appid }
     global url
@@ -39,7 +38,7 @@ def weather(city_name):
     print(wea)
     desc = (wea['weather'][0]['description'])
     temp = str(int((wea['main']['temp'])-273.13)) + " degrees"
-    return(city_name,desc,temp)
+    return (city_name,desc,temp)
 
 weather("London")
 
@@ -57,8 +56,7 @@ def index():
 def check_weather():
     data = request.get_json()
     user_input = data.get("password", "")
-    print("Input text: "+user_input)
     a = weather(user_input)
-    return jsonify({"result": "Il fait:"+a})
+    return jsonify({"result": str(a)})
 if __name__ == "__main__":
     app.run(debug=True)
