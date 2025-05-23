@@ -53,7 +53,7 @@ weather("London")
 def index():
     return render_template("index.html")
 
-@app.route("/check-password", methods=["POST"])
+@app.route("/check-weather", methods=["POST"])
 def check_weather():
     data = request.get_json()
     user_input = data.get("password", "")
