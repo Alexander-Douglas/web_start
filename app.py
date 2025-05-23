@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify, render_template
 
+# Import requests library
 import pip
 def install(package):
     if hasattr(pip, 'main'):
@@ -12,14 +13,17 @@ import requests
 app = Flask(__name__)
 
 # API --> weather demand using an API app (OpenWeatherMap)
-#API key = dbd5bc945bb792cf9efd2af6370466fd
+# API key = dbd5bc945bb792cf9efd2af6370466fd
 # https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&appid=dbd5bc945bb792cf9efd2af6370466fd
 #
-lon,lat,appid =str() ,str() , "dbd5bc945bb792cf9efd2af6370466fd"
+lon,lat,appid = str(),str(),"dbd5bc945bb792cf9efd2af6370466fd"
 # lat,lon = '51.5072','0.1276'
 # payload = {'lat': lat, 'lon': lon, 'appid':appid}
 
-# url = "https://api.openweathermap.org/data/2.5/weather?"
+# url = "api.openweathermap.org/data/2.5/weather?"              -> lat, lon, appid, [mode, units, lang]               →  Current weather data
+# url = "api.openweathermap.org/geo/1.0/direct?"                -> q, appid, [limit]                                  →  Geocoding (Name -> Coords)
+# url = "api.openweathermap.org/data/2.5/forecast?"             -> lat, lon, appid, [units, mode, cnt, units, lang]   →  5-day forecast
+# url = "http://api.openweathermap.org/data/2.5/air_pollution?" -> lat, lon, appid                                    →  Current air pollution data
 
 def weather(city_name):
     global payload
@@ -51,10 +55,11 @@ def index():
 @app.route("/check-weather", methods=["POST"])
 def check_weather():
     data = request.get_json()
-    user_input = data.get("password", "")
+    user_input = data.get("ville", "")
     a = weather(user_input)
-    print(a[1])
-    return jsonify({"result": str(a[1])})
+    ret_data = a[2]
+    print(ret_data)
+    return jsonify({"result": ret_data})
 
 
 if __name__ == "__main__":
