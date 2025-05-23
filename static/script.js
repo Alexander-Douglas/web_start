@@ -7,11 +7,10 @@ document.getElementById("submitBtn").addEventListener("click", () => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ password }),
   })
-    .then((response) => {
-      console.log(reponse);
+    .then((response) => { // Réponse donnée
       response.json();
     })
-    .then((data) => {
+    .then((data) => { // Retour des données JSON en Objet JS
       console.log(data);
       document.getElementById("response").textContent = data.result;
     })
