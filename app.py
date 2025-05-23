@@ -29,12 +29,13 @@ def weather(city_name):
     payload = {"q": city_name,"limit": 1,"appid": appid }
     global url
     url = "http://api.openweathermap.org/geo/1.0/direct?"
-    name = requests.get(url,params=payload)
-    lat = name.json()[0]["lat"]
-    lon = name.json()[0]["lon"]
+    name = requests.get(url,params=payload).json()[0]
+    lat = name["lat"]
+    lon = name["lon"]
     payload = {'lat': lat, 'lon': lon, 'appid': appid}
     url = "https://api.openweathermap.org/data/2.5/weather?"
     wea = requests.get(url,params=payload).json()
+    print(wea)
     desc = (wea['weather'][0]['description'])
     temp = str(int((wea['main']['temp'])-273.13)) + " degrees"
     return(city_name,desc,temp)
@@ -54,8 +55,8 @@ def index():
 def check_weather():
     data = request.get_json()
     user_input = data.get("password", "")
+    print("Input text: "+user_input)
     a = weather(user_input)
-    print(a)
     return jsonify({"result": "Il fait:"+a})
 if __name__ == "__main__":
     app.run(debug=True)
