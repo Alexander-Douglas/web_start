@@ -2,12 +2,14 @@ from flask import Flask, request, jsonify, render_template
 import pip
 
 def install(package):
+    print("Installing the library "+package)
     if hasattr(pip, 'main'):
         pip.main(['install', package])
     else:
         pip._internal.main(['install', package])
 install("requests")
 
+import requests
 
 app = Flask(__name__)
 
@@ -15,7 +17,6 @@ app = Flask(__name__)
 #API key = dbd5bc945bb792cf9efd2af6370466fd
 # https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&appid=dbd5bc945bb792cf9efd2af6370466fd
 #
-import requests
 lon,lat,appid =str() ,str() , "dbd5bc945bb792cf9efd2af6370466fd"
 # lat,lon = '51.5072','0.1276'
 # payload = {'lat': lat, 'lon': lon, 'appid':appid}
