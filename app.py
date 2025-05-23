@@ -30,6 +30,7 @@ def weather(city_name):
     global url
     url = "http://api.openweathermap.org/geo/1.0/direct?"
     name = requests.get(url,params=payload).json()[0]
+    print(name)
     lat = name["lat"]
     lon = name["lon"]
     payload = {'lat': lat, 'lon': lon, 'appid': appid}
@@ -39,7 +40,8 @@ def weather(city_name):
     desc = (wea['weather'][0]['description'])
     temp = str(int((wea['main']['temp'])-273.13)) + " degrees"
     return(city_name,desc,temp)
-#weather("London")
+
+weather("London")
 
 
 # print(requests.get('https://api.openweathermap.org/data/2.5/forecast?lat=51.5072&lon=0.1276&appid=dbd5bc945bb792cf9efd2af6370466fd'))
