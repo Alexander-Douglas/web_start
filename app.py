@@ -1,13 +1,12 @@
 from flask import Flask, request, jsonify, render_template
-import pip
 
+import pip
 def install(package):
     if hasattr(pip, 'main'):
         pip.main(['install', package])
     else:
         pip._internal.main(['install', package])
 install("requests")
-
 import requests
 
 app = Flask(__name__)
@@ -39,8 +38,6 @@ def weather(city_name):
     temp = str(int((wea['main']['temp'])-273.13)) + " degrees"
     return (city_name,desc,temp)
 
-weather("London")
-
 
 # print(requests.get('https://api.openweathermap.org/data/2.5/forecast?lat=51.5072&lon=0.1276&appid=dbd5bc945bb792cf9efd2af6370466fd'))
 
@@ -57,5 +54,7 @@ def check_weather():
     user_input = data.get("password", "")
     a = weather(user_input)
     return jsonify({"result": str(a)})
+
+
 if __name__ == "__main__":
     app.run(debug=True)
