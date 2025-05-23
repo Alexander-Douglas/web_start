@@ -2,7 +2,6 @@ from flask import Flask, request, jsonify, render_template
 import pip
 
 def install(package):
-    print("Installing the library "+package)
     if hasattr(pip, 'main'):
         pip.main(['install', package])
     else:
