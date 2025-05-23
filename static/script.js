@@ -1,6 +1,6 @@
 document.getElementById("submitBtn").addEventListener("click", () => {
   const password = document.getElementById("ville").value;
-
+  console.log("Bouton touché")
   // Envoi la requête POST au backend Python
   fetch("/check-weather", {
     method: "POST",
@@ -8,8 +8,8 @@ document.getElementById("submitBtn").addEventListener("click", () => {
     body: JSON.stringify({ password }),
   })
     .then((response) => {
-      response.json();
       console.log(reponse);
+      response.json();
     })
     .then((data) => {
       console.log(data);
