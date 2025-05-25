@@ -9,7 +9,7 @@ document.getElementById("submitBtn").addEventListener("click", () => {
   })
     .then((response) => response.json()) // Réponse donnée
     .then((data) => { // Retour des données JSON en Objet JS
-      console.log(data);
+      console.log(data.result);
       document.getElementById("response").textContent = data.result;
     })
     .catch(() => {
