@@ -68,9 +68,7 @@ def check_weather():
     data = request.get_json()
     user_input = data.get("ville", "")
     data = get_weather(user_input)
-    ret_data = data[1]
-    print(ret_data)
-    return jsonify({"result": ret_data})
+    return jsonify({"result": data})
 
 
 if __name__ == "__main__":
