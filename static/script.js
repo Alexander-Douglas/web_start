@@ -9,8 +9,8 @@ document.getElementById("submitBtn").addEventListener("click", () => {
   })
     .then((response) => response.json()) // Réponse donnée
     .then((data) => { // Retour des données JSON en Objet JS
-      console.log(data.result);
-      document.getElementById("response").textContent = data.result;
+      console.log(data);
+      document.getElementById("response").textContent = data;
     })
     .catch(() => {
       document.getElementById("response").textContent = "Erreur serveur.";
