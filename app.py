@@ -51,7 +51,7 @@ def get_weather(city_name):
     url = "https://api.openweathermap.org/data/2.5/air_pollution?"
     air_poll = requests.get(url,params=payload).json()
     print(air_poll)
-    return (name,weather,forecast,air_poll)
+    return (geocode,weather,forecast,air_poll)
 
 
 # print(requests.get('https://api.openweathermap.org/data/2.5/forecast?lat=51.5072&lon=0.1276&appid=dbd5bc945bb792cf9efd2af6370466fd'))
