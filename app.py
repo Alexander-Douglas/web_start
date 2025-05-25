@@ -40,7 +40,7 @@ def get_weather(city_name):
     url = "https://api.openweathermap.org/data/2.5/weather?"
     weather = requests.get(url,params=payload).json()
     print(weather)
-    desc = (wea['weather'][0]['description'])
+    desc = (weather['weather'][0]['description'])
     # Forecast
     payload = {'lat': lat, 'lon': lon, 'appid': appid, 'units': units, 'lang': lang}
     url = "https://api.openweathermap.org/data/2.5/forecast?"
