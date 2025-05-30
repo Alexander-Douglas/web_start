@@ -3,8 +3,6 @@ const html = document.querySelector("html");
 const search = document.getElementById("search-bar");
 var modeVal = false;
 
-html.className = "light";
-
 mode.addEventListener("click", () => {
   modeVal = !modeVal;
   console.log(modeVal);
