@@ -4,15 +4,266 @@
     <meta charset="UTF-8" />
     <title>Météo</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Lexend+Deca:wght@100..900&family=Lexend+Exa:wght@100..900&family=Lexend+Giga:wght@100..900&family=Lexend+Mega:wght@100..900&family=Lexend+Peta:wght@100..900&family=Lexend+Tera:wght@100..900&family=Lexend+Zetta:wght@100..900&family=Sen:wght@400..800&family=Gravitas+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
 </head>
 <body>
-    <div class="container">
-        <h1>Météo en temps réel</h1>
-        <input type="text" id="ville" placeholder="Rentrez le nom de votre ville" />
-        <button id="submitBtn">Valider</button>
-        <p id="response"></p>
+    <div class="section" id="top">
+      <span class="material-symbols-outlined" id="logo">brightness_4</span>
+      <span class="material-symbols-outlined" id="logo-bg" style="font-variation-settings: 'FILL' 1">brightness_4</span>
+      <div id="app-name">APPLI MÉTÉO</div>
+      <div id="search">
+        <input type="search" id="search-bar" placeholder="Recherchez votre ville" />
+        <span class="material-symbols-outlined" id="search-icon">search</span>
+      </div>
+      <span class="material-symbols-outlined" id="mode-icon">dark_mode</span>
     </div>
-
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <div class="section" id="city">
+      <div id="fr-name">ANNECY</div>
+      <div id="location">ANNECY, AUVERGNE-RHÔNE-ALPES, FR</div>
+      <div id="coords">N°53.2226484, W°4.2036036</div>
+    </div>
+    <div class="section" id="time">
+      <div id="time-container">
+        <div class="sect-title">TEMPS LOCAL:</div>
+        <div id="local-time">16:25:43 +GMT01:00</div>
+      </div>
+      <div id="day-cycle"></div>
+    </div>
+    <div class="section" id="weather">
+      <div class="sect-title">MAINTENANT:</div>
+      <div id="wea-container">
+        <div id="wea-general">
+          <span class="material-symbols-outlined" id="wea-icon">foggy</span>
+          <div id="wea-details">
+            <div id="wea-desc">Pluie modérée</div>
+            <div id="wea-temp">11.7°</div>
+            <div id="wea-minmax_temp">11.1°/13.1°</div>
+          </div>
+        </div>
+        <div id="wea-percents">
+          <div class="perc-container" id="wea-humidity-perc">
+            <span class="material-symbols-outlined perc-icon" id="hum-icon">humidity_percentage</span>
+            <div class="perc-text" id="hum-text">23%</div>
+          </div>
+          <div class="perc-container" id="wea-cloudiness-perc">
+            <span class="material-symbols-outlined perc-icon" id="cld-icon">cloud</span>
+            <div class="perc-text" id="cld-text">91%</div>
+          </div>
+        </div>
+        <div id="wea-wind">
+          <div id="wind-icon-container">
+            <span class="material-symbols-outlined" id="wind-icon">straight</span>
+          </div>
+          <div id="wind-details">
+            <div id="wind-dir">230° (SO)</div>
+            <div id="wind-speed">7.72 m/s</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section" id="forecast">
+      <div class="sect-title">PRÉVISIONS:</div>
+      <div id="fc-hours">
+        <div class="fc-box">
+          <div class="fc-time">18:00</div>
+          <span class="material-symbols-outlined fc-wea">partly_cloudy_day</span>
+          <div class="fc-temp">12°</div>
+          <div class="fc-pop">
+            <span class="material-symbols-outlined fc-icon">rainy_light</span>
+            <div class="fc-text">100%</div>
+          </div>
+          <div class="fc-rain-mm">99.9 mm</div>
+          <div class="fc-cld">
+            <span class="material-symbols-outlined fc-icon">cloud</span>
+            <div class="fc-text">100%</div>
+          </div>
+        </div>
+        <div class="fc-line"></div>
+        <div class="fc-box">
+          <div class="fc-time">21:00</div>
+          <span class="material-symbols-outlined fc-wea">partly_cloudy_day</span>
+          <div class="fc-temp">12°</div>
+          <div class="fc-pop">
+            <span class="material-symbols-outlined fc-icon">rainy_light</span>
+            <div class="fc-text">100%</div>
+          </div>
+          <div class="fc-rain-mm">09.9 mm</div>
+          <div class="fc-cld">
+            <span class="material-symbols-outlined fc-icon">cloud</span>
+            <div class="fc-text">20%</div>
+          </div>
+        </div>
+        <div class="fc-line"></div>
+        <div class="fc-box">
+          <div class="fc-time">00:00</div>
+          <span class="material-symbols-outlined fc-wea">partly_cloudy_day</span>
+          <div class="fc-temp">10°</div>
+          <div class="fc-pop">
+            <span class="material-symbols-outlined fc-icon">rainy_light</span>
+            <div class="fc-text">23%</div>
+          </div>
+          <div class="fc-rain-mm">23.0 mm</div>
+          <div class="fc-cld">
+            <span class="material-symbols-outlined fc-icon">cloud</span>
+            <div class="fc-text">93%</div>
+          </div>
+        </div>
+        <div class="fc-line"></div>
+        <div class="fc-box">
+          <div class="fc-time">03:00</div>
+          <span class="material-symbols-outlined fc-wea">partly_cloudy_day</span>
+          <div class="fc-temp">11°</div>
+          <div class="fc-pop">
+            <span class="material-symbols-outlined fc-icon">rainy_light</span>
+            <div class="fc-text">04%</div>
+          </div>
+          <div class="fc-rain-mm">00.9 mm</div>
+          <div class="fc-cld">
+            <span class="material-symbols-outlined fc-icon">cloud</span>
+            <div class="fc-text">31%</div>
+          </div>
+        </div>
+        <div class="fc-line"></div>
+        <div class="fc-box">
+          <div class="fc-time">06:00</div>
+          <span class="material-symbols-outlined fc-wea">partly_cloudy_day</span>
+          <div class="fc-temp">12°</div>
+          <div class="fc-pop">
+            <span class="material-symbols-outlined fc-icon">rainy_light</span>
+            <div class="fc-text">01%</div>
+          </div>
+          <div class="fc-rain-mm">01.4 mm</div>
+          <div class="fc-cld">
+            <span class="material-symbols-outlined fc-icon">cloud</span>
+            <div class="fc-text">07%</div>
+          </div>
+        </div>
+        <div class="fc-line"></div>
+        <div class="fc-box">
+          <div class="fc-time">09:00</div>
+          <span class="material-symbols-outlined fc-wea">partly_cloudy_day</span>
+          <div class="fc-temp">13°</div>
+          <div class="fc-pop">
+            <span class="material-symbols-outlined fc-icon">rainy_light</span>
+            <div class="fc-text">00%</div>
+          </div>
+          <div class="fc-rain-mm">00.1 mm</div>
+          <div class="fc-cld">
+            <span class="material-symbols-outlined fc-icon">cloud</span>
+            <div class="fc-text">03%</div>
+          </div>
+        </div>
+        <div class="fc-line"></div>
+        <div class="fc-box">
+          <div class="fc-time">12:00</div>
+          <span class="material-symbols-outlined fc-wea">partly_cloudy_day</span>
+          <div class="fc-temp">15°</div>
+          <div class="fc-pop">
+            <span class="material-symbols-outlined fc-icon">rainy_light</span>
+            <div class="fc-text">01%</div>
+          </div>
+          <div class="fc-rain-mm">00.9 mm</div>
+          <div class="fc-cld">
+            <span class="material-symbols-outlined fc-icon">cloud</span>
+            <div class="fc-text">10%</div>
+          </div>
+        </div>
+        <div class="fc-line"></div>
+        <div class="fc-box">
+          <div class="fc-time">15:00</div>
+          <span class="material-symbols-outlined fc-wea">partly_cloudy_day</span>
+          <div class="fc-temp">13°</div>
+          <div class="fc-pop">
+            <span class="material-symbols-outlined fc-icon">rainy_light</span>
+            <div class="fc-text">03%</div>
+          </div>
+          <div class="fc-rain-mm">14.2 mm</div>
+          <div class="fc-cld">
+            <span class="material-symbols-outlined fc-icon">cloud</span>
+            <div class="fc-text">80%</div>
+          </div>
+        </div>
+      </div>
+      <div id="fc-days">
+        <div class="fc-box">
+          <div class="fc-time">26/05</div>
+          <span class="material-symbols-outlined fc-wea">partly_cloudy_day</span>
+          <div class="fc-temp">12°</div>
+          <div class="fc-pop">
+            <span class="material-symbols-outlined fc-icon">rainy_light</span>
+            <div class="fc-text">100%</div>
+          </div>
+          <div class="fc-rain-mm">99.9 mm</div>
+          <div class="fc-cld">
+            <span class="material-symbols-outlined fc-icon">cloud</span>
+            <div class="fc-text">100%</div>
+          </div>
+        </div>
+        <div class="fc-line"></div>
+        <div class="fc-box">
+          <div class="fc-time">27/05</div>
+          <span class="material-symbols-outlined fc-wea">partly_cloudy_day</span>
+          <div class="fc-temp">12°</div>
+          <div class="fc-pop">
+            <span class="material-symbols-outlined fc-icon">rainy_light</span>
+            <div class="fc-text">100%</div>
+          </div>
+          <div class="fc-rain-mm">09.9 mm</div>
+          <div class="fc-cld">
+            <span class="material-symbols-outlined fc-icon">cloud</span>
+            <div class="fc-text">20%</div>
+          </div>
+        </div>
+        <div class="fc-line"></div>
+        <div class="fc-box">
+          <div class="fc-time">28/05</div>
+          <span class="material-symbols-outlined fc-wea">partly_cloudy_day</span>
+          <div class="fc-temp">10°</div>
+          <div class="fc-pop">
+            <span class="material-symbols-outlined fc-icon">rainy_light</span>
+            <div class="fc-text">23%</div>
+          </div>
+          <div class="fc-rain-mm">23.0 mm</div>
+          <div class="fc-cld">
+            <span class="material-symbols-outlined fc-icon">cloud</span>
+            <div class="fc-text">93%</div>
+          </div>
+        </div>
+        <div class="fc-line"></div>
+        <div class="fc-box">
+          <div class="fc-time">29/05</div>
+          <span class="material-symbols-outlined fc-wea">partly_cloudy_day</span>
+          <div class="fc-temp">11°</div>
+          <div class="fc-pop">
+            <span class="material-symbols-outlined fc-icon">rainy_light</span>
+            <div class="fc-text">04%</div>
+          </div>
+          <div class="fc-rain-mm">00.9 mm</div>
+          <div class="fc-cld">
+            <span class="material-symbols-outlined fc-icon">cloud</span>
+            <div class="fc-text">31%</div>
+          </div>
+        </div>
+        <div class="fc-line"></div>
+        <div class="fc-box">
+          <div class="fc-time">30/05</div>
+          <span class="material-symbols-outlined fc-wea">partly_cloudy_day</span>
+          <div class="fc-temp">12°</div>
+          <div class="fc-pop">
+            <span class="material-symbols-outlined fc-icon">rainy_light</span>
+            <div class="fc-text">01%</div>
+          </div>
+          <div class="fc-rain-mm">01.4 mm</div>
+          <div class="fc-cld">
+            <span class="material-symbols-outlined fc-icon">cloud</span>
+            <div class="fc-text">07%</div>
+          </div>
+        </div>
+      </div>
+    </div>
 </body>
 </html>
