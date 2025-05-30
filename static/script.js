@@ -22,7 +22,7 @@ mode.addEventListener("click", () => {
 });
 
 search.addEventListener("search", () => {
-  const ville = document.getElementById("ville").value;
+  const ville = document.getElementById("search-bar").value;
   console.log("Bouton touché")
   // Envoi la requête POST au backend Python
   fetch("/check-weather", {
