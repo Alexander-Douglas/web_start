@@ -1,3 +1,4 @@
+/* Mode Color Palettes */
 html.light {
   /* light mode */
   --background: #fef7ff;
@@ -27,7 +28,6 @@ body {
 }
 
 div {
-  border: var(--prim-container) 1pt solid;
   padding: 5px;
 }
 
@@ -35,7 +35,6 @@ div {
   height: 100%;
   width: 95%;
   background-color: var(--background);
-  border: #ccf 1pt solid;
   padding: 50px 10px;
 }
 
