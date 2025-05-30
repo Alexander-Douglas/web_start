@@ -1,4 +1,27 @@
-document.getElementById("submitBtn").addEventListener("click", () => {
+const mode = document.getElementById("mode-icon");
+const html = document.querySelector("html");
+const search = document.getElementById("search-bar");
+var modeVal = false;
+
+html.className = "light";
+
+mode.addEventListener("click", () => {
+  modeVal = !modeVal;
+  console.log(modeVal);
+  if (modeVal) {
+    // light mode
+    mode.innerHTML = "dark_mode";
+    mode.style.color = "var(--primary)";
+    html.className = "light";
+  } else {
+    // dark mode
+    mode.innerHTML = "light_mode";
+    mode.style.color = "var(--secondary)";
+    html.className = "dark";
+  }
+});
+
+search.addEventListener("search", () => {
   const ville = document.getElementById("ville").value;
   console.log("Bouton touché")
   // Envoi la requête POST au backend Python
