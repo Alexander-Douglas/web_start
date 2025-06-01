@@ -4,9 +4,11 @@ const search = document.getElementById("search-bar");
 let modeVal = false;
 
 const updateScreenSize = () => {
-  let scale = screen.width/1400;
-  document.querySelector('meta[name="viewport"]').setAttribute('content', 'width='+1400+', initial-scale='+scale);
+  let scale = screen.width/1360;
+  document.querySelector('meta[name="viewport"]').setAttribute('content', 'width='+1360+', initial-scale='+scale);
 }
+
+updateScreenSize()
 
 mode.addEventListener("click", () => {
   modeVal = !modeVal;
