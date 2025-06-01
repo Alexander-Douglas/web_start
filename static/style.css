@@ -23,6 +23,7 @@ body {
   justify-content: center;
   font-family: "Lexend Deca";
   min-width: 1350px;
+  max-width: 2300px;
 }
 
 div {
