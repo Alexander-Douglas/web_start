@@ -29,9 +29,40 @@
     <div class="section" id="time">
       <div id="time-container">
         <div class="sect-title">TEMPS LOCAL:</div>
-        <div id="local-time">16:25:43 +GMT01:00</div>
+        <div id="local-time">16:25:43 +GMT02:00</div>
       </div>
-      <div id="day-cycle"></div>
+      <div id="day-cycle">
+        <svg width="300px" height="150px" viewBox="-40 -170 2710 1610" version="1.1" id="svg" xmlns="http://www.w3.org/2000/svg">
+          <defs id="defs">
+            <linearGradient id="gradient-reg">
+              <stop style="stop-color:#6474d3;stop-opacity:1;" offset="0" id="stop5" />
+              <stop style="stop-color:#6474d3;stop-opacity:1;" offset="0.55" id="stop6" />
+              <stop style="stop-color:#343c6d;stop-opacity:1;" offset="0.65" id="stop7" />
+              <stop style="stop-color:#343c6d;stop-opacity:1;" offset="1" id="stop8" />
+            </linearGradient>
+            <linearGradient id="gradient-inv">
+              <stop style="stop-color:#343c6d;stop-opacity:1;" offset="0" id="stop1" />
+              <stop style="stop-color:#343c6d;stop-opacity:1;" offset="0.55" id="stop9" />
+              <stop style="stop-color:#6474d3;stop-opacity:1;" offset="0.65" id="stop10" />
+              <stop style="stop-color:#6474d3;stop-opacity:1;" offset="1" id="stop3" />
+            </linearGradient>
+            <radialGradient xlink:href="#gradient-reg" id="radialGradient-partial" cx="1206.8311" cy="845.61066" fx="1210.2091" fy="845.14093" r="205.05212" gradientUnits="userSpaceOnUse" gradientTransform="matrix(1.3870989,0,0,1.6897778,-1548.3172,-1224.016)" spreadMethod="pad" />
+            <radialGradient xlink:href="#gradient-reg" id="radialGradient-half" cx="1206.8311" cy="845.61066" fx="1210.2091" fy="845.14093" r="205.05212" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0.72774357,0,0,3.1813904,-752.58682,-2485.3395)" spreadMethod="pad" />
+          </defs>
+          <path id="cycle-path" d="M 36.380199,1233.6198 H 321.17936 m 1897.64124,0 h 284.7992 M 169.33333,1230.3035 C 169.33333,554.35062 672.42268,36.380171 1270,36.3802 c 604.464,0 1100.6667,537.91135 1100.6667,1193.9233" />
+          <circle id="cycle-body" r="185.20837" cy="205.05212" cx="205.05212" />
+        </svg>
+        <div id="cycle-text">
+          <div class="cycle-text" id="cycle-text-rise">
+            <span class="material-symbols-outlined cycle-text-icon" id="cycle-rise-icon">upload</span>
+            06:24
+          </div>
+          <div class="cycle-text" id="cycle-text-set">
+            <span class="material-symbols-outlined cycle-text-icon" id="cycle-set-icon">download</span>
+            21:03
+          </div>
+        </div>
+      </div>
     </div>
     <div class="section" id="weather">
       <div class="sect-title">MAINTENANT:</div>
@@ -39,7 +70,7 @@
         <div id="wea-general">
           <span class="material-symbols-outlined" id="wea-icon">foggy</span>
           <div id="wea-details">
-            <div id="wea-desc">Pluie modérée</div>
+            <div id="wea-desc">Partiellement nuageux</div>
             <div id="wea-temp">11.7°</div>
             <div id="wea-minmax_temp">11.1°/13.1°</div>
           </div>
