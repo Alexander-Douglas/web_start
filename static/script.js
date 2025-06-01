@@ -1,9 +1,10 @@
 const mode = document.getElementById("mode-icon");
 const html = document.querySelector("html");
 const search = document.getElementById("search-bar");
-var modeVal = false;
+let modeVal = false;
 
-html.className = "light";
+let scale = screen.width/1350;
+document.querySelector('meta[name="viewport"]').setAttribute('content', "width='1350', initial-scale='+scale+'");
 
 mode.addEventListener("click", () => {
   modeVal = !modeVal;
