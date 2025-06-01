@@ -142,10 +142,56 @@ div {
   font-family: "Lexend Exa";
   font-size: 1.75rem;
   font-weight: 300;
+  margin-top: 25px;
 }
 
 #time > #day-cycle {
   width: 75%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#day-cycle > #cycle-svg {
+}
+
+#cycle-path {
+  fill: none;
+  stroke: #343c6d;
+  stroke-width: 72.7604;
+  stroke-linecap: square;
+  stroke-linejoin: round;
+}
+
+/*
+Moon Phases:
+Dark Moon, Waxing Crescent, 1st Quarter, Waxing Gibbous, Full Moon, Waning Gibbous, 3rd Quarter, Waning Crescent
+*/
+#cycle-body {
+  stroke: #b0beff;
+  stroke-width: 39.6875;
+  fill: #6474d3;
+}
+
+#day-cycle > #cycle-text {
+  width: 320px;
+  font-family: "Lexend Exa";
+  font-size: 1.25rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#cycle-text > .cycle-text {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}
+
+.cycle-text > .cycle-text-icon {
+  font-size: 2rem;
 }
 
 #weather {
