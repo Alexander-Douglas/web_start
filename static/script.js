@@ -21,10 +21,6 @@ mode.addEventListener("click", () => {
   }
 });
 
-search.addEventListener("search", () => {
-  console.log("Searching...");
-});
-
 // Tous les secondes, remettre à jour l'horaire
 setInterval(() => {}, 1000);
 
@@ -120,9 +116,8 @@ search.addEventListener("search", () => {
     .then((response) => response.json()) // Réponse donnée
     .then((data) => { // Retour des données JSON en Objet JS
       console.log(data);
-      document.getElementById("response").textContent = data;
     })
     .catch(() => {
-      document.getElementById("response").textContent = "Erreur serveur.";
+      console.log("Erreur serveur.");
     });
 });
