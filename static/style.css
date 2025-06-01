@@ -26,15 +26,12 @@ body {
 }
 
 div {
-  border: var(--prim-container) 1pt solid;
   padding: 5px;
 }
 
 .section {
   height: 100%;
   width: 95%;
-  background-color: var(--background);
-  border: #ccf 1pt solid;
   padding: 50px 10px;
 }
 
