@@ -5,7 +5,7 @@ let modeVal = false;
 
 const updateScreenSize = () => {
   let scale = screen.width/1500;
-  document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=1500, maximum-scale=1, initial-scale='+scale);
+  document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=1500, maximum-scale=1.25, initial-scale='+scale);
 }
 
 updateScreenSize()
