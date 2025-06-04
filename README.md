@@ -29,6 +29,7 @@ bash :
 	pip install -r requirements.txt
 	python app.py
 
+---
 
-#### Partie élèves
+## Partie élèves
 DOUGLAS Alexander, DOUGLAS Daniel, SERRES Samson, KUZNIAK Volodymyr
