@@ -52,7 +52,7 @@ def get_weather(city_name):
     payload = {'d': d}
     url = "https://api.farmsense.net/v1/moonphases/?"
     moonphase = requests.get(url,params=payload).json()
-    print(forecast)
+    print(moonphase)
     return (geocode,weather,forecast,moonphase)
 
 
