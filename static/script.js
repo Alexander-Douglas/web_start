@@ -121,6 +121,19 @@ search.addEventListener("search", () => {
     .then((response) => response.json()) // Réponse donnée
     .then((data) => { // Retour des données JSON en Objet JS
       console.log(data);
+      // Calcul de cycle jour/nuit
+      let dtSunrise = 0;
+      let dtSunset = 0;
+      let dtTime = 0;
+      if (dtTime <= dt_sunset) { // S'il fait jour
+        let dtDiffSun = dtSunset - dtSunrise
+        let dtDiffTime = dtTime - dtSunrise
+        let percCycle = dtDiffTime/dtDiffSun
+          } else { // S'il fait nuit
+        let dtDiffSun = dt_sunrise+86400 - dt_sunset // On dit que le soleil se leve le jour suivant à la même heure.
+        let dtDiffTime = dtTime - dtTunset
+        let percCycle = dtDiffTime/dtDiffSun
+          }
     })
     .catch(() => {
       console.log("Erreur serveur.");
