@@ -28,3 +28,7 @@ bash :
 	source env/bin/activate  # Windows : env\Scripts\activate
 	pip install -r requirements.txt
 	python app.py
+
+
+#### Partie élèves
+DOUGLAS Alexander, DOUGLAS Daniel, SERRES Samson, KUZNIAK Volodymyr
