@@ -81,7 +81,7 @@ div {
   align-items: center;
 }
 
-#top > * > #search-bar {
+#search > #search-bar {
   width: 90%;
   height: 55px;
   background-color: var(--prim-container);
@@ -94,8 +94,12 @@ div {
   font-weight: 600;
   letter-spacing: -0.05rem;
 }
+#search > #search-bar:focus::after {
+  appearance: none;
+  content: none;
+}
 
-#top > * > #search-icon {
+#search > #search-icon {
   transform: translate(-45px, 0);
   font-size: 1.75rem;
 }
