@@ -28,8 +28,8 @@ mode.addEventListener("click", () => {
 // Tous les secondes, remettre à jour l'horaire
 let timerInterval = setInterval(() => {}, 1000);
 
-// Tous les heures, remettre à jour la position de l'astre
-let cycleInterval = setInterval(() => {}, 3600 * 1000);
+// Tous les 10 minutes, remettre à jour la position de l'astre
+let cycleInterval = setInterval(() => {}, 600 * 1000);
 
 function posCircle(angle, rot_offset) {
   angle = angle * Math.PI;
@@ -150,7 +150,7 @@ search.addEventListener("search", () => {
       let dtTime = data[1].dt;
       let moonPhase = data[3][0].Phase;
       clearInterval(cycleInterval);
-      cycleInterval = setInterval(drawCycle, 3600 * 1000, dtSunrise, dtSunset, dtTime, moonPhase);
+      cycleInterval = setInterval(drawCycle, 600 * 1000, dtSunrise, dtSunset, dtTime, moonPhase);
     })
     .catch(() => {
       console.log("Erreur serveur.");
