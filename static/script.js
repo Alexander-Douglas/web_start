@@ -3,6 +3,11 @@ const html = document.querySelector("html");
 const search = document.getElementById("search-bar");
 let modeVal = false;
 
+const rightJustify = (text, size, char) => {
+  text = String(text);
+  return char*Math.max(0,size-text.length)+text;
+}
+
 const updateScreenSize = () => {
   let scale = screen.width/2000;
   document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=2000, initial-scale='+scale);
@@ -26,7 +31,7 @@ mode.addEventListener("click", () => {
 });
 
 // Tous les secondes, remettre à jour l'horaire
-let timerInterval = setInterval(() => {}, 1000);
+let timeInterval = setInterval(() => {}, 1000);
 
 // Tous les 10 minutes, remettre à jour la position de l'astre
 let cycleInterval = setInterval(() => {}, 600 * 1000);
@@ -144,10 +149,21 @@ search.addEventListener("search", () => {
     .then((response) => response.json()) // Réponse donnée
     .then((data) => { // Retour des données JSON en Objet JS
       console.log(data);
+      // Localisation
+
+      // Temps
+      let date = new Date();
+      let dtTime = data[1].dt;
+      let timezone = data[1].timezone/3600
+      date.setTime(dtTime);
+      clearInterval(timeInterval);
+      timeInterval = setInterval((timezone) => {
+        let now = Date.now()
+        document.getElementById("local-time").innerHTML = `${rightJustify(now.getHours(),2,"0")}:${rightJustify(now.getMinutes(),2,"0")}:${rightJustify(now.getSeconds(),2,"0")} ${Math.sign(timezone)<0?"-":"+"}GMT${rightJustify(Math.abs(timezone),2,"0")}:00`
+      }, 1000, timezone);
       // Calcul de cycle jour/nuit
       let dtSunrise = data[1].sys.sunrise;
       let dtSunset = data[1].sys.sunset;
-      let dtTime = data[1].dt;
       let moonPhase = data[3][0].Phase;
       clearInterval(cycleInterval);
       cycleInterval = setInterval(drawCycle, 600 * 1000, dtSunrise, dtSunset, dtTime, moonPhase);
