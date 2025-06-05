@@ -12,7 +12,6 @@ updateScreenSize()
 
 mode.addEventListener("click", () => {
   modeVal = !modeVal;
-  console.log(modeVal);
   if (modeVal) {
     // light mode
     mode.innerHTML = "dark_mode";
@@ -27,10 +26,10 @@ mode.addEventListener("click", () => {
 });
 
 // Tous les secondes, remettre à jour l'horaire
-setInterval(() => {}, 1000);
+let timerInterval = setInterval(() => {}, 1000);
 
 // Tous les heures, remettre à jour la position de l'astre
-setInterval(() => {}, 3600 * 1000);
+let cycleInterval = setInterval(() => {}, 3600 * 1000);
 
 function posCircle(angle, rot_offset) {
   angle = angle * Math.PI;
@@ -58,7 +57,7 @@ function posCircle(angle, rot_offset) {
 }
 
 function drawPhase(phase, angle) {
-  body = document.getElementById("cycle-body");
+  let body = document.getElementById("cycle-body");
   switch (phase) {
     case "Dark Moon":
       body.style.fill = "#343c6d";
@@ -107,6 +106,30 @@ function drawPhase(phase, angle) {
   }
 }
 
+function drawCycle(dtSunrise, dtSunset, dtTime, phase) {
+  let path = document.getElementById("cycle-path");
+  let body = document.getElementById("cycle-body");
+  dtSunrise += 86400*((dtSunset <= dtTime) & (dtSunrise < dtTime));
+  dtSunset -= 86400*((dtTime <= dtSunrise) & (dtTime < dtSunset));
+  if (dtTime <= dtSunset) { // S'il fait jour
+    let dtDiffSun = dtSunset - dtSunrise;
+    let dtDiffTime = dtTime - dtSunrise;
+    let percCycle = dtDiffTime/dtDiffSun;
+    path.style.stroke = "f4a75a";
+    body.style.stroke = "ffce9d";
+    body.style.fill = "f4a75a";
+    posCircle(percCycle,0);
+    console.log(dtDiffSun, dtDiffTime, percCycle);
+      } else { // S'il fait nuit
+    let dtDiffSun = dtSunrise - dtSunset;
+    let dtDiffTime = dtTime - dtSunset;
+    let percCycle = dtDiffTime/dtDiffSun;
+    console.log(dtDiffSun, dtDiffTime, percCycle);
+    path.style.stroke = "343c6d";
+    drawPhase()
+      };
+  }
+
 posCircle(0.5,0)
 
 search.addEventListener("search", () => {
@@ -122,20 +145,12 @@ search.addEventListener("search", () => {
     .then((data) => { // Retour des données JSON en Objet JS
       console.log(data);
       // Calcul de cycle jour/nuit
-      let dtSunrise = data[1].sys.sunrise + 86400*((temp1[1].sys.sunset <= temp1[1].dt) & (temp1[1].sys.sunrise < temp1[1].dt));
-      let dtSunset = data[1].sys.sunset - 86400*((temp1[1].dt <= temp1[1].sys.sunrise) & (temp1[1].dt < temp1[1].sys.sunset));
+      let dtSunrise = data[1].sys.sunrise;
+      let dtSunset = data[1].sys.sunset;
       let dtTime = data[1].dt;
-      if (dtTime <= dtSunset) { // S'il fait jour
-        let dtDiffSun = dtSunset - dtSunrise
-        let dtDiffTime = dtTime - dtSunrise
-        let percCycle = dtDiffTime/dtDiffSun
-        console.log(dtDiffSun, dtDiffTime, percCycle)
-          } else { // S'il fait nuit
-        let dtDiffSun = dtSunrise - dtSunset
-        let dtDiffTime = dtTime - dtSunset
-        let percCycle = dtDiffTime/dtDiffSun
-        console.log(dtDiffSun, dtDiffTime, percCycle)
-          }
+      let moonPhase = data[3].phase;
+      clearInterval(cycleInterval);
+      cycleInterval = setInterval(drawCycle, 3600 * 1000, dtSunrise, dtSunset, dtTime, moonPhase);
     })
     .catch(() => {
       console.log("Erreur serveur.");
