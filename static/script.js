@@ -159,7 +159,7 @@ search.addEventListener("search", () => {
       clearInterval(timeInterval);
       timeInterval = setInterval((timezone) => {
         let now = Date.now()
-        document.getElementById("local-time").innerHTML = `${rightJustify(now.getHours(),2,"0")}:${rightJustify(now.getMinutes(),2,"0")}:${rightJustify(now.getSeconds(),2,"0")} ${Math.sign(timezone)<0?"-":"+"}GMT${rightJustify(Math.abs(timezone),2,"0")}:00`
+        document.getElementById("local-time").innerHTML = `${rightJustify((now.getUTCHours()-timezone)%24,2,"0")}:${rightJustify(now.getMinutes(),2,"0")}:${rightJustify(now.getSeconds(),2,"0")} ${Math.sign(timezone)<0?"-":"+"}GMT${rightJustify(Math.abs(timezone),2,"0")}:00`
       }, 1000, timezone);
       // Calcul de cycle jour/nuit
       let dtSunrise = data[1].sys.sunrise;
