@@ -148,7 +148,7 @@ search.addEventListener("search", () => {
       let dtSunrise = data[1].sys.sunrise;
       let dtSunset = data[1].sys.sunset;
       let dtTime = data[1].dt;
-      let moonPhase = data[3].phase;
+      let moonPhase = data[3][0].Phase;
       clearInterval(cycleInterval);
       cycleInterval = setInterval(drawCycle, 3600 * 1000, dtSunrise, dtSunset, dtTime, moonPhase);
     })
