@@ -3,6 +3,10 @@ const html = document.querySelector("html");
 const search = document.getElementById("search-bar");
 let modeVal = false;
 
+const modulo = (n, d) => {
+  return ((n % d) + d) % d
+}
+
 const rightJustify = (text, size, char) => {
   text = String(text);
   return char.repeat(Math.max(0,size-text.length))+text;
@@ -162,9 +166,9 @@ search.addEventListener("search", () => {
       clearInterval(timeInterval);
       timeInterval = setInterval((timezone) => {
         let now = new Date()
-        document.getElementById("local-time").innerHTML = `${rightJustify(Math.floor(now.getUTCHours()+timezone)%24,2,"0")}:`
-          +`${rightJustify((now.getUTCMinutes()+timezone*60)%60,2,"0")}:${rightJustify(now.getUTCSeconds(),2,"0")}`
-          +` ${Math.sign(timezone)<0?"-":"+"}GMT${rightJustify(Math.abs(Math.floor(timezone)),2,"0")}:${rightJustify((timezone*60)%60,2,"0")}`
+        document.getElementById("local-time").innerHTML = `${rightJustify(modulo(Math.floor(now.getUTCHours()+timezone),24),2,"0")}:`
+          +`${rightJustify(modulo(now.getUTCMinutes()+timezone*60,60),2,"0")}:${rightJustify(now.getUTCSeconds(),2,"0")}`
+          +` ${Math.sign(timezone)<0?"-":"+"}GMT${rightJustify(Math.abs(Math.floor(timezone)),2,"0")}:${rightJustify(modulo(timezone*60,60),2,"0")}`
       }, 1000, timezone);
       // Calcul de cycle jour/nuit
       let dtSunrise = data[1].sys.sunrise;
@@ -172,11 +176,11 @@ search.addEventListener("search", () => {
       let moonPhase = data[3][0].Phase;
       let date = new Date();
       date.setTime(dtSunrise*1000);
-      let sunriseTime = `${rightJustify(Math.floor(date.getUTCHours()+timezone)%24,2,"0")}:`
-          +`${rightJustify((date.getUTCMinutes()+timezone*60)%60,2,"0")}`;
+      let sunriseTime = `${rightJustify(modulo(Math.floor(date.getUTCHours()+timezone),24),2,"0")}:`
+          +`${rightJustify(modulo(date.getUTCMinutes()+timezone*60,60),2,"0")}`;
       date.setTime(dtSunset*1000);
-      let sunsetTime = `${rightJustify(Math.floor(date.getUTCHours()+timezone)%24,2,"0")}:`
-          +`${rightJustify((date.getUTCMinutes()+timezone*60)%60,2,"0")}`;
+      let sunsetTime = `${rightJustify(modulo(Math.floor(date.getUTCHours()+timezone),24),2,"0")}:`
+          +`${rightJustify(modulo(date.getUTCMinutes()+timezone*60,60),2,"0")}`;
       document.getElementById("cycle-rise-text").innerHTML = Date.now()/1000 > dtSunset ? sunriseTime : sunsetTime;
       document.getElementById("cycle-set-text").innerHTML = Date.now()/1000 > dtSunset ? sunsetTime : sunriseTime;
       drawCycle(dtSunrise, dtSunset, moonPhase)
