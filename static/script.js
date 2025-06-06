@@ -168,10 +168,10 @@ search.addEventListener("search", () => {
       let dtSunset = data[1].sys.sunset;
       let moonPhase = data[3][0].Phase;
       let date = new Date();
-      date.setTime(dtSunrise);
+      date.setTime(dtSunrise*1000);
       document.getElementById("cycle-rise-text").innerHTML = `${rightJustify(Math.floor(date.getUTCHours()+timezone)%24,2,"0")}:`
           +`${rightJustify((date.getUTCMinutes()+timezone*60)%60,2,"0")}`;
-      date.setTime(dtSunset);
+      date.setTime(dtSunset*1000);
       document.getElementById("cycle-set-text").innerHTML = `${rightJustify(Math.floor(date.getUTCHours()+timezone)%24,2,"0")}:`
           +`${rightJustify((date.getUTCMinutes()+timezone*60)%60,2,"0")}`;
       drawCycle(dtSunrise, dtSunset, moonPhase)
