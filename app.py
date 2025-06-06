@@ -20,9 +20,11 @@ appid = "dbd5bc945bb792cf9efd2af6370466fd"
 units = "metric"
 lang = "fr"
 
-# url = "api.openweathermap.org/data/2.5/weather?"       -> lat, lon, appid, [mode, units, lang]               →  Current weather data
-# url = "api.openweathermap.org/geo/1.0/direct?"         -> q, appid, [limit]                                  →  Geocoding (Name -> Coords)
-# url = "api.openweathermap.org/data/2.5/forecast?"      -> lat, lon, appid, [units, mode, cnt, units, lang]   →  5-day forecast every 3 hours
+# url = "api.openweathermap.org/data/2.5/weather?"   -> lat, lon, appid, [mode, units, lang]               →  Current weather data
+# url = "api.openweathermap.org/geo/1.0/direct?"     -> q, appid, [limit]                                  →  Geocoding (Name -> Coords)
+# url = "api.openweathermap.org/data/2.5/forecast?"  -> lat, lon, appid, [units, mode, cnt, units, lang]   →  5-day forecast every 3 hours
+
+# url = "https://api.farmsense.net/v1/moonphases/?"  -> d (UNIX Time)                                      →  Moon phase data
 
 def get_weather(city_name):
     global payload
@@ -45,12 +47,13 @@ def get_weather(city_name):
     url = "https://api.openweathermap.org/data/2.5/forecast?"
     forecast = requests.get(url,params=payload).json()
     print(forecast)
-    return (geocode,weather,forecast)
-
-
-# print(requests.get('https://api.openweathermap.org/data/2.5/forecast?lat=51.5072&lon=0.1276&appid=dbd5bc945bb792cf9efd2af6370466fd'))
-
-
+    # Moon phase
+    d = weather['dt']
+    payload = {'d': d}
+    url = "https://api.farmsense.net/v1/moonphases/?"
+    moonphase = requests.get(url,params=payload).json()
+    print(moonphase)
+    return (geocode,weather,forecast,moonphase)
 
 
 @app.route("/")
