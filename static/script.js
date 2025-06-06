@@ -124,14 +124,14 @@ function drawCycle(dtSunrise, dtSunset, dtTime, phase) {
     body.style.stroke = "ffce9d";
     body.style.fill = "f4a75a";
     posCircle(percCycle,0);
-    console.log(dtDiffSun, dtDiffTime, percCycle);
+    console.log("Day", dtDiffSun, dtDiffTime, percCycle);
       } else { // S'il fait nuit
     let dtDiffSun = dtSunrise - dtSunset;
     let dtDiffTime = dtTime - dtSunset;
     let percCycle = dtDiffTime/dtDiffSun;
-    console.log(dtDiffSun, dtDiffTime, percCycle);
+    console.log("Night", dtDiffSun, dtDiffTime, percCycle);
     path.style.stroke = "343c6d";
-    drawPhase()
+    drawPhase(phase,percCycle)
       };
   }
 
