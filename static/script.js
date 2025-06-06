@@ -132,6 +132,7 @@ function drawCycle(dtSunrise, dtSunset, phase) {
     let percCycle = dtDiffTime/dtDiffSun;
     console.log("Night", dtDiffSun, dtDiffTime, percCycle);
     path.style.stroke = "#343c6d";
+    body.style.stroke = "#b0beff";
     drawPhase(phase,percCycle)
       };
   }
@@ -153,22 +154,25 @@ search.addEventListener("search", () => {
       // Localisation
 
       // Temps
-      let date = new Date();
       let dtTime = data[1].dt;
       let timezone = data[1].timezone/3600
-      date.setTime(dtTime);
       clearInterval(timeInterval);
       timeInterval = setInterval((timezone) => {
         let now = new Date()
-        document.getElementById("local-time").innerHTML = `${rightJustify((now.getUTCHours()+timezone)%24,2,"0")}:${rightJustify(now.getMinutes(),2,"0")}:${rightJustify(now.getSeconds(),2,"0")} ${Math.sign(timezone)<0?"-":"+"}GMT${rightJustify(Math.abs(timezone),2,"0")}:00`
+        document.getElementById("local-time").innerHTML = `${rightJustify(Math.floor(now.getUTCHours()+timezone)%24,2,"0")}:`
+          +`${rightJustify((now.getUTCMinutes()+timezone*60)%60,2,"0")}:${rightJustify(now.getUTCSeconds(),2,"0")}`
+          +` ${Math.sign(timezone)<0?"-":"+"}GMT${rightJustify(Math.abs(timezone),2,"0")}:00`
       }, 1000, timezone);
       // Calcul de cycle jour/nuit
       let dtSunrise = data[1].sys.sunrise;
       let dtSunset = data[1].sys.sunset;
       let moonPhase = data[3][0].Phase;
+      let date = new Date();
+      date.setTime(dtSunrise);
+      //document.getElementById("cycle-rise-text").innerHTML = "";
       drawCycle(dtSunrise, dtSunset, moonPhase)
       clearInterval(cycleInterval);
-      cycleInterval = setInterval(drawCycle, 600 * 1000, dtSunrise, dtSunset, moonPhase);
+      cycleInterval = setInterval(drawCycle, 60 * 1000, dtSunrise, dtSunset, moonPhase);
     })
     .catch(() => {
       console.log("Erreur serveur.");
