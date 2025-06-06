@@ -121,9 +121,9 @@ function drawCycle(dtSunrise, dtSunset, phase) {
     let dtDiffSun = dtSunset - dtSunrise;
     let dtDiffTime = dtTime - dtSunrise;
     let percCycle = dtDiffTime/dtDiffSun;
-    path.style.stroke = "f4a75a";
-    body.style.stroke = "ffce9d";
-    body.style.fill = "f4a75a";
+    path.style.stroke = "#f4a75a";
+    body.style.stroke = "#ffce9d";
+    body.style.fill = "#f4a75a";
     posCircle(percCycle,0);
     console.log("Day", dtDiffSun, dtDiffTime, percCycle);
       } else { // S'il fait nuit
@@ -131,7 +131,7 @@ function drawCycle(dtSunrise, dtSunset, phase) {
     let dtDiffTime = dtTime - dtSunset;
     let percCycle = dtDiffTime/dtDiffSun;
     console.log("Night", dtDiffSun, dtDiffTime, percCycle);
-    path.style.stroke = "343c6d";
+    path.style.stroke = "#343c6d";
     drawPhase(phase,percCycle)
       };
   }
