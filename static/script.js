@@ -36,23 +36,26 @@ let timeInterval = setInterval(() => {}, 1000);
 // Tous les 10 minutes, remettre à jour la position de l'astre
 let cycleInterval = setInterval(() => {}, 600 * 1000);
 
+let rot = document.querySelector("svg").createSVGTransform();
+rot.setRotate(180, 1270, 36.38024);
+document.getElementById("radialGradient-half").gradientTransform.baseVal.insertItemBefore(rot, 0);
+document.getElementById("radialGradient-partial").gradientTransform.baseVal.insertItemBefore(rot, 0);
+delete rot;
+
 function posCircle(angle, rot_offset) {
-  angle = angle * Math.PI;
   let svg = document.querySelector("svg");
   let circle = document.getElementById("cycle-body");
   let grad_half = document.getElementById("radialGradient-half");
   let grad_part = document.getElementById("radialGradient-partial");
 
-  let x = 1270 - 1100 * Math.cos(angle);
-  let y = 1233.6199 - 1197.23966 * Math.sin(angle);
-
-  let rot = document.querySelector("svg").createSVGTransform();
-  rot.setRotate(rot_offset + 90 + (180 * angle) / Math.PI, x, y);
-  grad_half.gradientTransform.baseVal.insertItemBefore(rot, 0);
-  grad_part.gradientTransform.baseVal.insertItemBefore(rot, 0);
+  let x = 1270 - 1100 * Math.cos(angle * Math.PI);
+  let y = 1233.6199 - 1197.23966 * Math.sin(angle * Math.PI);
 
   circle.cx.baseVal.value = x;
   circle.cy.baseVal.value = y;
+  
+  grad_half.gradientTransform.baseVal[0].setRotate(rot_offset + 90 + (180 * angle), x, y);
+  grad_part.gradientTransform.baseVal[0].setRotate(rot_offset + 90 + (180 * angle), x, y);
 
   grad_half.gradientTransform.baseVal[1].matrix.e = x - 956.9722;
   grad_half.gradientTransform.baseVal[1].matrix.f = y - 2690.3917;
