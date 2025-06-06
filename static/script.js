@@ -111,9 +111,10 @@ function drawPhase(phase, angle) {
   }
 }
 
-function drawCycle(dtSunrise, dtSunset, dtTime, phase) {
+function drawCycle(dtSunrise, dtSunset, phase) {
   let path = document.getElementById("cycle-path");
   let body = document.getElementById("cycle-body");
+  let dtTime = Date.now()/1000
   dtSunrise += 86400*((dtSunset <= dtTime) & (dtSunrise < dtTime));
   dtSunset -= 86400*((dtTime <= dtSunrise) & (dtTime < dtSunset));
   if (dtTime <= dtSunset) { // S'il fait jour
@@ -165,9 +166,9 @@ search.addEventListener("search", () => {
       let dtSunrise = data[1].sys.sunrise;
       let dtSunset = data[1].sys.sunset;
       let moonPhase = data[3][0].Phase;
-      drawCycle(dtSunrise, dtSunset, dtTime, moonPhase)
+      drawCycle(dtSunrise, dtSunset, moonPhase)
       clearInterval(cycleInterval);
-      cycleInterval = setInterval(drawCycle, 600 * 1000, dtSunrise, dtSunset, dtTime, moonPhase);
+      cycleInterval = setInterval(drawCycle, 600 * 1000, dtSunrise, dtSunset, moonPhase);
     })
     .catch(() => {
       console.log("Erreur serveur.");
