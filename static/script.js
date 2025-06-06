@@ -137,7 +137,7 @@ function drawCycle(dtSunrise, dtSunset, phase) {
       };
   }
 
-posCircle(0.5,0)
+drawPhase("Waxing Gibbous", 0.3);
 
 search.addEventListener("search", () => {
   const ville = document.getElementById("search-bar").value;
