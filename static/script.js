@@ -159,7 +159,7 @@ search.addEventListener("search", () => {
     .then((data) => { // Retour des données JSON en Objet JS
       console.log(data);
       // Localisation
-      document.getElementById("fr-name").innerHTML = Boolean(data[0].local_names.fr):data[0].local_names.fr.toUpperCase():data[0].name.toUpperCase();
+      document.getElementById("fr-name").innerHTML = Boolean(data[0].local_names.fr)?data[0].local_names.fr.toUpperCase():data[0].name.toUpperCase();
       document.getElementById("location").innerHTML = `${data[0].name.toUpperCase()}, ${Boolean(data[0].state)?data[0].state.toUpperCase()+", ":""}${data[0].country.toUpperCase()}`;
       document.getElementById("coords").innerHTML = `${data[0].lat>=0?"N":"S"}°${Math.abs(data[0].lat)}, ${data[0].lon>=0?"W":"E"}°${Math.abs(data[0].lon)}`;
       // Temps
