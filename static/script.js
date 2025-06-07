@@ -121,7 +121,7 @@ function drawPhase(phase, angle) {
 function drawCycle(dtSunrise, dtSunset, phase) {
   let path = document.getElementById("cycle-path");
   let body = document.getElementById("cycle-body");
-  let dtTime = Date.now()/1000
+  let dtTime = Date.now()/1000;
   dtSunrise += 86400*((dtSunset <= dtTime) & (dtSunrise < dtTime));
   dtSunset -= 86400*((dtTime <= dtSunrise) & (dtTime < dtSunset));
   if (dtTime <= dtSunset) { // S'il fait jour
@@ -174,6 +174,9 @@ search.addEventListener("search", () => {
       let dtSunrise = data[1].sys.sunrise;
       let dtSunset = data[1].sys.sunset;
       let moonPhase = data[3][0].Phase;
+      let dtTime = Date.now()/1000;
+      dtSunrise += 86400*((dtSunset <= dtTime) & (dtSunrise < dtTime));
+      dtSunset -= 86400*((dtTime <= dtSunrise) & (dtTime < dtSunset));
       let date = new Date();
       date.setTime(dtSunrise*1000);
       let sunriseTime = `${rightJustify(modulo(Math.floor(date.getUTCHours()+timezone),24),2,"0")}:`
@@ -181,8 +184,8 @@ search.addEventListener("search", () => {
       date.setTime(dtSunset*1000);
       let sunsetTime = `${rightJustify(modulo(Math.floor(date.getUTCHours()+timezone),24),2,"0")}:`
           +`${rightJustify(modulo(date.getUTCMinutes()+timezone*60,60),2,"0")}`;
-      document.getElementById("cycle-rise-text").innerHTML = Date.now()/1000 <= dtSunset ? sunriseTime : sunsetTime;
-      document.getElementById("cycle-set-text").innerHTML = Date.now()/1000 <= dtSunset ? sunsetTime : sunriseTime;
+      document.getElementById("cycle-rise-text").innerHTML = dtTime <= dtSunset ? sunriseTime : sunsetTime;
+      document.getElementById("cycle-set-text").innerHTML = dtTime <= dtSunset ? sunsetTime : sunriseTime;
       drawCycle(dtSunrise, dtSunset, moonPhase)
       clearInterval(cycleInterval);
       cycleInterval = setInterval(drawCycle, 60 * 1000, dtSunrise, dtSunset, moonPhase);
