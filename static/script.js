@@ -200,9 +200,9 @@ weatherIcons = new Map([
   ["800d","clear_day"],
   ["800n","moon_stars"],
   ["801d","partly_cloudy_day"],
-  ["801d","partly_cloudy_day"],
+  ["802d","partly_cloudy_day"],
   ["801n","partly_cloudy_night"],
-  ["801n","partly_cloudy_night"],
+  ["802n","partly_cloudy_night"],
   ["803","cloud"],
   ["804","cloud"]
 ])
