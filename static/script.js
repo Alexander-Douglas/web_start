@@ -146,6 +146,67 @@ function drawCycle(dtSunrise, dtSunset, phase) {
 
 drawPhase("Waxing Gibbous", 0.3);
 
+weatherIcons = new Map([
+  [200,"thunderstorm"],
+  [201,"thunderstorm"],
+  [202,"thunderstorm"],
+  [210,"thunderstorm"],
+  [211,"thunderstorm"],
+  [212,"thunderstorm"],
+  [221,"thunderstorm"],
+  [230,"thunderstorm"],
+  [231,"thunderstorm"],
+  [232,"thunderstorm"],
+  [300,"rainy_light"],
+  [301,"rainy_light"],
+  [310,"rainy_light"],
+  [311,"rainy_light"],
+  [500,"rainy_light"],
+  [501,"rainy_light"],
+  [520,"rainy_light"],
+  [521,"rainy_light"],
+  [302,"rainy_heavy"],
+  [312,"rainy_heavy"],
+  [313,"rainy_heavy"],
+  [314,"rainy_heavy"],
+  [321,"rainy_heavy"],
+  [502,"rainy_heavy"],
+  [503,"rainy_heavy"],
+  [504,"rainy_heavy"],
+  [522,"rainy_heavy"],
+  [531,"rainy_heavy"],
+  [511,"weather_mix"],
+  [600,"snowing"],
+  [601,"snowing"],
+  [602,"snowing"],
+  [611,"weather_hail"],
+  [612,"weather_hail"],
+  [613,"weather_hail"],
+  [615,"rainy_snow"],
+  [616,"rainy_snow"],
+  [620,"snowing_heavy"],
+  [621,"snowing_heavy"],
+  [622,"snowing_heavy"],
+  [701,"mist"],
+  [711,"mist"],
+  [721,"mist"],
+  [731,"mist"],
+  [741,"mist"],
+  [751,"mist"],
+  [761,"mist"],
+  [762,"mist"],
+  [771,"mist"],
+  [781,"tornado"],
+  ["800d","clear_day"],
+  ["800n","moon_stars"],
+  ["801d","partly_cloudy_day"],
+  ["801d","partly_cloudy_day"],
+  ["801n","partly_cloudy_night"],
+  ["801n","partly_cloudy_night"],
+  [803,"cloud"],
+  [804,"cloud"]
+])
+
 search.addEventListener("search", () => {
   const ville = document.getElementById("search-bar").value;
   console.log("Bouton touché")
@@ -161,7 +222,7 @@ search.addEventListener("search", () => {
       // Localisation
       document.getElementById("fr-name").innerHTML = Boolean(data[0].local_names.fr)?data[0].local_names.fr.toUpperCase():data[0].name.toUpperCase();
       document.getElementById("location").innerHTML = `${data[0].name.toUpperCase()}, ${Boolean(data[0].state)?data[0].state.toUpperCase()+", ":""}${data[0].country.toUpperCase()}`;
-      document.getElementById("coords").innerHTML = `${data[0].lat>=0?"N":"S"}°${Math.abs(data[0].lat)}, ${data[0].lon>=0?"W":"E"}°${Math.abs(data[0].lon)}`;
+      document.getElementById("coords").innerHTML = `${data[0].lat>=0?"N":"S"}°${Math.abs(data[0].lat)}, ${data[0].lon<=0?"W":"E"}°${Math.abs(data[0].lon)}`;
       // Temps
       let timezone = data[1].timezone/3600
       clearInterval(timeInterval);
@@ -190,6 +251,32 @@ search.addEventListener("search", () => {
       drawCycle(dtSunrise, dtSunset, moonPhase);
       clearInterval(cycleInterval);
       cycleInterval = setInterval(drawCycle, 60 * 1000, dtSunrise, dtSunset, moonPhase);
+      // Météo Actuel
+      let desc = data[1].weather[0].description.split("");
+      desc[0] = desc[0].toUpperCase();
+      document.getElementById("wea-desc").innerHTML = desc.join("");
+      let weaId = data[1].weather[0].id;
+      weaId += data[1].weather[0].icon.slice(-1).repeat(weaId == 800 | weaId == 801 | weaId == 802);
+      let weaIcon = weatherIcons.get(weaId);
+      document.getElementById("wea-icon").innerHTML = weaIcon;
+      let nowTemp = data[1].main.temp.toFixed(2);
+      let minTemp = data[1].main.temp_min.toFixed(2);
+      let maxTemp = data[1].main.temp_max.toFixed(2);
+      document.getElementById("wea-temp").innerHTML = `${nowTemp}°`;
+      document.getElementById("wea-minmax_temp").innerHTML = `${minTemp}°/${maxTemp}°`;
+      let percHumidity = data[1].main.humidity;
+      let percCloudiness = data[1].clouds.all;
+      document.getElementById("hum-text").innerHTML = `${percHumidity}%`;
+      document.getElementById("cld-text").innerHTML = `${percCloudiness}%`;
+      let windDirDeg = data[1].wind.deg;
+      let windDirCard = ["N","NE","E","SE","S","SW","W","NW","N"][Math.round(windDirDeg/45)];
+      let windSpeed = data[1].wind.speed.toFixed(2);
+      document.getElementById("wind-dir").innerHTML = `${windDirDeg}° (${windDirCard})`;
+      document.getElementById("wind-speed").innerHTML = `${windSpeed} m/s`;
+      // Prévisions 3-heures
+
+      // Prévisions 5-jours
+      
     })
     .catch(() => {
       console.log("Erreur serveur.");
