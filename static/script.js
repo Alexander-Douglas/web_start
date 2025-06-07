@@ -281,7 +281,7 @@ search.addEventListener("search", () => {
       // Prévisions 5-jours
       
     })
-    .catch(() => {
-      console.log("Erreur serveur.");
+    .catch((error) => {
+      console.log(`Erreur serveur: ${error}`);
     });
 });
