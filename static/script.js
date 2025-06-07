@@ -161,7 +161,6 @@ search.addEventListener("search", () => {
       // Localisation
 
       // Temps
-      let dtTime = data[1].dt;
       let timezone = data[1].timezone/3600
       clearInterval(timeInterval);
       timeInterval = setInterval((timezone) => {
