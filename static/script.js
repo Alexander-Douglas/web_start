@@ -274,7 +274,7 @@ search.addEventListener("search", () => {
       document.getElementById("wind-dir").innerHTML = `${windDirDeg}° (${windDirCard})`;
       document.getElementById("wind-speed").innerHTML = `${windSpeed} m/s`;
       document.getElementById("wind-icon").style.transform = `rotate(${windDirDeg}deg)`;
-      let windSpeedSize = Math.min(Math.max(0, (0.08*windSpeed+3.5).toFixed(1)), 5);
+      let windSpeedSize = Math.min(Math.max(3.25, (0.08*windSpeed+3.5).toFixed(1)), 5);
       document.getElementById("wind-icon").style.fontSize = `${windSpeedSize}rem`;
       // Prévisions 3-heures
 
