@@ -181,8 +181,8 @@ search.addEventListener("search", () => {
       date.setTime(dtSunset*1000);
       let sunsetTime = `${rightJustify(modulo(Math.floor(date.getUTCHours()+timezone),24),2,"0")}:`
           +`${rightJustify(modulo(date.getUTCMinutes()+timezone*60,60),2,"0")}`;
-      document.getElementById("cycle-rise-text").innerHTML = Date.now()/1000 > dtSunset ? sunriseTime : sunsetTime;
-      document.getElementById("cycle-set-text").innerHTML = Date.now()/1000 > dtSunset ? sunsetTime : sunriseTime;
+      document.getElementById("cycle-rise-text").innerHTML = Date.now()/1000 <= dtSunset ? sunriseTime : sunsetTime;
+      document.getElementById("cycle-set-text").innerHTML = Date.now()/1000 <= dtSunset ? sunsetTime : sunriseTime;
       drawCycle(dtSunrise, dtSunset, moonPhase)
       clearInterval(cycleInterval);
       cycleInterval = setInterval(drawCycle, 60 * 1000, dtSunrise, dtSunset, moonPhase);
